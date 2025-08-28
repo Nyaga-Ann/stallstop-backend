@@ -15,10 +15,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    
     # Third-party
     "rest_framework",
     "drf_yasg",
+    "django_filters",
 
     # Local apps
     "users",
@@ -92,6 +93,12 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
         "rest_framework.permissions.IsAuthenticated",
     ),
+
+"DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ]
 }
 
 SIMPLE_JWT = {
