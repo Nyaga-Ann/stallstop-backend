@@ -21,7 +21,7 @@ class ItemListCreateView(generics.ListCreateAPIView):
 class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsVendorOwnerOrReadOnly]
 
     def perform_update(self, serializer):
         serializer.save(vendor=self.request.user.vendor_profile)
