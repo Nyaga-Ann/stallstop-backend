@@ -1,9 +1,7 @@
 from django.urls import path
-from django.http import JsonResponse
-
-def health(_):
-    return JsonResponse({"status": "ok", "service": "vendors"})
+from . import views
 
 urlpatterns = [
-    path("health/", health, name="vendors-health"),
+    path("", views.VendorListCreateView.as_view(), name="vendor-list-create"),
+    path("<int:pk>/", views.VendorDetailView.as_view(), name="vendor-detail"),
 ]

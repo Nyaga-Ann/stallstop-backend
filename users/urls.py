@@ -1,9 +1,10 @@
 from django.urls import path
-from django.http import JsonResponse
-
-def health(_):
-    return JsonResponse({"status": "ok", "service": "users"})
+from . import views
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
-    path("health/", health, name="users-health"),
+    path("register/", views.RegisterView.as_view(), name="register"),
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
+
