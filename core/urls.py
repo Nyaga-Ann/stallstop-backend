@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from rest_framework.documentation import include_docs_urls
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
 
@@ -27,6 +29,12 @@ urlpatterns = [
     path("api/users/", include("users.urls")),
     path("api/vendors/", include("vendors.urls")),
     path("api/items/", include("items.urls")),
+
+      # API schema
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path("api/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+]
 
 
     # Docs
