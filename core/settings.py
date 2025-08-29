@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "drf_spectacular",
     "django_filters",
+    "corsheaders",
 
     # Local apps
     "users",
@@ -39,6 +40,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware"
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -114,3 +116,5 @@ SIMPLE_JWT = {
 SWAGGER_SETTINGS = {
     "USE_SESSION_AUTH": False,
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
