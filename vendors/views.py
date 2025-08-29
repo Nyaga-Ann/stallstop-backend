@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, viewsets
 from .models import VendorProfile
-from .serializers import VendorSerializer
+from .serializers import VendorProfileSerializer
 from .permissions import IsVendorOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class VendorListCreateView(generics.ListCreateAPIView):
     queryset = VendorProfile.objects.all()
-    serializer_class = VendorSerializer
+    serializer_class = VendorProfileSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
@@ -16,7 +16,7 @@ class VendorListCreateView(generics.ListCreateAPIView):
 
 class VendorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = VendorProfile.objects.all()
-    serializer_class = VendorSerializer
+    serializer_class = VendorProfileSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class VendorProfileViewSet(viewsets.ModelViewSet):

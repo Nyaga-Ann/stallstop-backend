@@ -19,13 +19,14 @@ INSTALLED_APPS = [
     # Third-party
     "rest_framework",
     "drf_yasg",
-    "drf_spectacular"
+    "drf_spectacular",
     "django_filters",
 
     # Local apps
     "users",
     "vendors",
     "items",
+    "customers",
 ]
 
 MIDDLEWARE = [
