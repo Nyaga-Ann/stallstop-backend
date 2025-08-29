@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from .models import Item, ItemFavorite
+from vendors.models import VendorProfile
 
 class ItemSerializer(serializers.ModelSerializer):
+    vendor = VendorMiniSerializer(read_only=True)
     vendor_name = serializers.CharField(source="vendor.business_name", read_only=True)
 
     class Meta:
@@ -18,6 +20,11 @@ class ItemSerializer(serializers.ModelSerializer):
             "created_at",
         ]
         read_only_fields = ["id", "created_at", "vendor"]
+
+class VendorMiniSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VendorProfile
+        fields = ["id", "business_name", "shop_type", "location"]
 
 class ItemFavoriteSerializer(serializers.ModelSerializer):
     item_name = serializers.CharField(source="item.name", read_only=True)
