@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, viewsets
-from .models import VendorProfile
-from .serializers import VendorProfileSerializer
+from .models import VendorProfile, VendorFavorite
+from .serializers import VendorProfileSerializer, VendorFavoriteSerializer
 from .permissions import IsVendorOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -27,3 +27,19 @@ class VendorProfileViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+class MyVendorFavoritesView(generics.ListCreateAPIView):
+    serializer_class = VendorFavoriteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return VendorFavorite.objects.filter(customer=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(customer=self.request.user)
+
+class VendorFavoriteDetailView(generics.DestroyAPIView):
+    serializer_class = VendorFavoriteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return VendorFavorite.objects.filter(customer=self.request.user)

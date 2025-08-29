@@ -21,3 +21,15 @@ class VendorProfile(models.Model):
 
     def __str__(self):
         return f"{self.business_name} - {self.location}"
+
+class VendorFavorite(models.Model):
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="favorite_vendors")
+    vendor = models.ForeignKey(VendorProfile, on_delete=models.CASCADE, related_name="favorited_by")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("customer", "vendor")
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.customer} ⭐ {self.vendor}"
