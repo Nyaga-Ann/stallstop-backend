@@ -9,4 +9,3 @@ class ItemFilter(django_filters.FilterSet):
     class Meta:
         model = Item
         fields = ["category", "vendor_location", "min_price", "max_price"]
-s

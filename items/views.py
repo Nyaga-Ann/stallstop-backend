@@ -4,6 +4,7 @@ from rest_framework import filters
 from rest_framework import generics, permissions
 from .models import Item
 from .serializers import ItemSerializer
+from .permissions import IsVendorOwnerOrReadOnly 
 from .filters import ItemFilter
 
 class ItemListCreateView(generics.ListCreateAPIView):
