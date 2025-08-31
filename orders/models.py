@@ -3,6 +3,7 @@ from django.conf import settings
 from items.models import Item
 from vendors.models import VendorProfile
 
+
 class Order(models.Model):
     class Status(models.TextChoices):
         PENDING = "pending", "Pending"
@@ -23,4 +24,5 @@ class Order(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"Order #{self.id} - {self.item.name} x{self.quantity}"
+        item_names = ", ".join([item.name for item in self.items.all()])
+        return f"Order #{self.id} - {item_names} (x{self.quantity})"

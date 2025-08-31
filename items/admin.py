@@ -1,13 +1,16 @@
 from django.contrib import admin
-from .models import Item
+from .models import Item, ItemFavorite
+
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ("name", "vendor", "price", "stock", "created_at")
-    list_filter = ("vendor",)
-    search_fields = ("name", "vendor__shop_name")
+    list_display = ("id", "name", "category", "price", "vendor", "created_at")
+    list_filter = ("category", "vendor")
+    search_fields = ("name", "vendor__business_name")
+
 
 @admin.register(ItemFavorite)
 class ItemFavoriteAdmin(admin.ModelAdmin):
-    list_display = ("user", "item", "created_at")
-    search_fields = ("user__username", "item__name")
+    list_display = ("id", "customer", "item", "created_at")
+    list_filter = ("created_at", "customer")
+    search_fields = ("customer__username", "item__name")

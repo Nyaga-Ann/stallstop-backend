@@ -10,12 +10,14 @@ urlpatterns = [
     path("", root, name="root"),
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
+    path("api/", include("users.urls")), 
 
     # App URLs
     path("api/users/", include("users.urls")),
     path("api/vendors/", include("vendors.urls")),
     path("api/items/", include("items.urls")),
     path("api/customers/", include("customers.urls")),
+    path("api/orders/", include("orders.urls")),
 
     # API schema & docs
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
