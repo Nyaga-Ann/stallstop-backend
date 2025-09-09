@@ -1,19 +1,25 @@
 from django.contrib import admin
 from django.urls import path, include
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView,
+)
 from django.http import JsonResponse
+
 
 def root(_):
     return JsonResponse({"service": "StallStop API", "status": "ok"})
 
+
 urlpatterns = [
     path("", root, name="root"),
     path("admin/", admin.site.urls),
-    path("users/", include("users.urls")),
-    path("api/", include("users.urls")), 
+
+    # Auth / Users
+    path("api/auth/", include("users.urls")),   # 👈 all login/signup/token endpoints live here
 
     # App URLs
-    path("api/users/", include("users.urls")),
     path("api/vendors/", include("vendors.urls")),
     path("api/items/", include("items.urls")),
     path("api/customers/", include("customers.urls")),

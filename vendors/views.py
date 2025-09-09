@@ -65,3 +65,10 @@ class VendorReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
         vendor_id = self.kwargs["vendor_id"]
         # only author can update/delete
         return VendorReview.objects.filter(vendor_id=vendor_id, customer=self.request.user)
+
+class MyVendorProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = VendorProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user.vendor_profile
